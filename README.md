@@ -10,10 +10,20 @@ Este aplicativo é capaz de recuperar o tempo total de vídeos e transmissões a
 
 ## Instruções
 
-1. **Configuração do Ambiente:**
+1. **Clonando o Repositório:**
+   - Abra o terminal e execute o comando abaixo para clonar o repositório:
+     ```bash
+     git clone https://github.com/AlexSnider/YoutubeTotalTime
+     ```
+   - Navegue até o diretório do projeto:
+     ```bash
+     cd YoutubeTotalTime
+     ```
+
+2. **Configuração do Ambiente:**
    - Renomeie o arquivo `.env.example` para `.env` e preencha as informações necessárias. 
 
-2. **Obtenção da Chave de API do YouTube:**
+3. **Obtenção da Chave de API do YouTube:**
 
    Para utilizar este aplicativo, você precisará de uma chave de API do YouTube. Siga os passos abaixo para obtê-la:
 
@@ -29,7 +39,7 @@ Este aplicativo é capaz de recuperar o tempo total de vídeos e transmissões a
    10. Clique em "Create Credentials" e selecione "API key".
    11. Sua chave de API será gerada. Copie essa chave e cole-a no arquivo `.env`, no campo `YOUTUBE_API_KEY`.
 
-3. **Execução:**
+4. **Execução:**
    - Escolha o arquivo `run` apropriado para o sistema operacional que você está usando:
      - `runAppLinux.sh` para Linux/macOS.
      - `runAppWindows.bat` para Windows.
