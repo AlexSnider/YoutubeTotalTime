@@ -11,7 +11,7 @@ Este aplicativo é capaz de recuperar o tempo total de vídeos e transmissões a
 ## Instruções
 
 1. **Configuração do Ambiente:**
-   - Renomeie o arquivo `.env.example` para `.env` e preencha as informações necessárias.
+   - Renomeie o arquivo `.env.example` para `.env` e preencha as informações necessárias. 
 
 2. **Obtenção da Chave de API do YouTube:**
 
