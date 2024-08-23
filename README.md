@@ -57,6 +57,8 @@ Este aplicativo é capaz de recuperar o tempo total de vídeos e transmissões a
      - `runAppLinux.sh` para Linux/macOS.
      - `runAppWindows.bat` para Windows.
    - Execute o script e aguarde até que o arquivo `totaltime.txt` seja gerado com os dados.
+  
+   <br/>
 
    > **Nota:** Durante a execução, uma barra de progresso será exibida no terminal. Ela indicará o andamento da recuperação dos dados, mostrando a porcentagem concluída e o tempo estimado restante. Aguarde até que a barra atinja 100% para garantir que todos os resultados foram processados corretamente.
 
