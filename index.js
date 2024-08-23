@@ -1,6 +1,7 @@
 const axios = require("axios");
 const fs = require("fs");
 require("dotenv").config();
+const pgb = require("progress");
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 const CHANNEL_ID = process.env.CHANNEL_ID;
@@ -16,6 +17,18 @@ async function getTotalDurations() {
   let totalLiveDuration = 0;
   let nextPageToken = "";
   let hasNextPage = true;
+  let totalVideos = 0;
+  let processedVideos = 0;
+
+  const initialData = await fetchAllVideos();
+  totalVideos = initialData.pageInfo.totalResults;
+
+  const progressBar = new pgb("Progress [:bar] :percent, :etas", {
+    complete: "=",
+    incomplete: " ",
+    width: 50,
+    total: totalVideos,
+  });
 
   while (hasNextPage) {
     const data = await fetchAllVideos(nextPageToken);
@@ -30,24 +43,34 @@ async function getTotalDurations() {
 
       const duration = details.contentDetails.duration;
       const seconds = conversionISO8601Duration(duration);
+
       totalDuration += seconds;
 
       if (details.liveStreamingDetails) {
         totalLiveDuration += seconds;
       }
+
+      processedVideos++;
+      progressBar.tick();
     }
 
     nextPageToken = data.nextPageToken;
     hasNextPage = !!nextPageToken;
   }
 
+  if (processedVideos < totalVideos) {
+    progressBar.tick(totalVideos - processedVideos);
+  }
+
   const totalDurationInHours = (totalDuration / 3600).toFixed(2);
   const totalLiveDurationInHours = (totalLiveDuration / 3600).toFixed(2);
 
-  const output = `Total time in hours of all videos: ${totalDurationInHours} hours.
+  const output = `\nTotal time in hours of all videos: ${totalDurationInHours} hours.
   \nTotal time in hours of live videos recorded: ${totalLiveDurationInHours} hours.`;
 
   fs.writeFileSync("totaltime.txt", output);
+
+  console.log("\nDone! Please check totaltime.txt file for the results.");
 }
 
 function conversionISO8601Duration(duration) {
