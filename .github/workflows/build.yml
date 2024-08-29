@@ -30,12 +30,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Docker image
-        run: docker push alexvoliveira/yttotaltime:${{ github.sha }}
-
       - name: Tag Docker image with SHA-256 hash
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           hash=$(tar -c . | sha256sum | awk '{ print $1 }')
           docker tag alexvoliveira/yttotaltime:${{ github.sha }} alexvoliveira/yttotaltime:${hash}
           docker push alexvoliveira/yttotaltime:${hash}
+
+      - name: Push Docker image
+        run: docker push alexvoliveira/yttotaltime:${{ github.sha }}
+
