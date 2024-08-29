@@ -23,7 +23,7 @@ async function getTotalDurations() {
   const initialData = await fetchAllVideos();
   totalVideos = initialData.pageInfo.totalResults;
 
-  const progressBar = new pgb("Progress [:bar] :percent, :etas", {
+  const progressBar = new pgb("Progress: :etas, [:bar] :percent, :etas", {  
     complete: "=",
     incomplete: " ",
     width: 50,
